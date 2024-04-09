@@ -25,10 +25,10 @@ model_names['M_1'] = '$M^{1}$'
 model_names['M_2'] = '$M^{2}$'
 model_names['M_3'] = '$M^{3}$'
 model_names['M_star'] = '$M^{*}$'
-model_names['M_0_bis'] = '$M^{0}_{bis}$'
+model_names['M_plus'] = '$M^{+}$'
 
 
-model_types = ('M_0_bis', 'M_0', 'M_1', 'M_2', 'M_3', 'M_star')
+model_types = ('M_plus', 'M_0', 'M_1', 'M_2', 'M_3', 'M_star')
 
 def tolerant_mean(arrs):
     lens = [len(i) for i in arrs]
@@ -125,7 +125,7 @@ def plot_training(model_types, model_names,n_seeds_init, n_seeds_end,n_out,
 
     # fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 8), sharex=True)
     fig = plt.figure(figsize=(12, 8))
-    fig.suptitle('Training process averaged on 10 seeds')
+    fig.suptitle('Mean Training Performance Over 10 Seeds')
     gs = gridspec.GridSpec(2, 2, width_ratios=[0.5,0.5], height_ratios=[1, 1])
     ax1 = fig.add_subplot(gs[0, :])
     C = plt.get_cmap("Reds")(np.linspace(0.1, 1, 6))
@@ -202,11 +202,7 @@ def plot_testing(model_types, model_names, n_seeds_init, n_seeds_end, show=False
             ax = axes[0, s]
         else:
             ax = axes[1, int(s-3)]
-        if model_type != 'regular' or model_type != 'regular_separate_input':
-            """labels_ttest= 'paired t-test with regular model: \n'+'p val overall:' + str(
-                round(compute_t_test('regular', model_type, n_seeds_init, n_seeds_end, n_out)['success'][1], 3)) + '\n' + \
-                         'p val best_first:' + str(
-                round(compute_t_test('regular', model_type, n_seeds_init, n_seeds_end, n_out)['best_first'][1], 3))"""
+        #if model_type != 'M_0' or model_type != 'M_1':
             #ttest_overall = round(compute_t_test('regular_separate_input', model_type, n_seeds_init, n_seeds_end, n_out)['success'][1], 8)
             #ttest_first = round(compute_t_test('regular_separate_input', model_type, n_seeds_init, n_seeds_end, n_out)['best_first'][1], 8)
             #ttest_last = round(compute_t_test('regular_separate_input', model_type, n_seeds_init, n_seeds_end, n_out)['best_last'][1], 8)
@@ -215,15 +211,11 @@ def plot_testing(model_types, model_names, n_seeds_init, n_seeds_end, show=False
             #print('first', ttest_first)
             #print('last', ttest_last)
 
-            #if model_type == "continuous_dual_separate_input":
-             #   print(ttest_overall)
-              #  print(ttest_first)
-            #indicate_significant_difference(ax, labels, [ttest_overall, ttest_first])
         Y.append(success_arrays)
         Y.append(best_first_arrays)
         Y.append(best_last_arrays)
         Y = np.array(Y)
-        title = 'Deterministic overlap case: 10 seeds of a 1000 trials testing set '
+        title = 'Mean Testing Performance Over 10 Seeds'
         if s==0 or s == 3:
             plot_results_nicolas(ax, Y, labels, model_names[model_type], legend=False, yaxis=True)
 
@@ -235,7 +227,7 @@ def plot_testing(model_types, model_names, n_seeds_init, n_seeds_end, show=False
                               markerfacecolor='black', markersize=20) for i in range(len(Y))]
     plt.legend(handles=legend_elements, bbox_to_anchor=(1.05, 1.0))
 
-    fig.suptitle('')
+    fig.suptitle(title)
     fig.subplots_adjust(hspace=.0)
     plt.tight_layout()
 
@@ -249,6 +241,6 @@ def plot_testing(model_types, model_names, n_seeds_init, n_seeds_end, show=False
 
 
 if __name__ == '__main__':
-    #plot_training(model_types, model_names, n_seeds_init=0, n_seeds_end=10, n_out=None)
-    plot_testing(model_types, model_names, n_seeds_init=0, n_seeds_end=10, show=True, save=False)
+    plot_training(model_types, model_names, n_seeds_init=0, n_seeds_end=9, n_out=None)
+    plot_testing(model_types, model_names, n_seeds_init=0, n_seeds_end=9, show=True, save=False)
 

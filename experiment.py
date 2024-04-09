@@ -186,9 +186,9 @@ class Experiment:
                                  eta=self.eta, beta=self.beta, decay=self.decay,
                                  output_connectivity=self.output_connectivity, fb_connectivity=self.fb_connectivity,
                                  separate_input=True)
-        elif self.model_type == "M_0_bis":
-            print('Initialise M_O_bis model..')
-            self.model = M_0_bis(filename=self.model_file, seed=seed, n_position=self.task.n_pos,
+        elif self.model_type == "M_plus":
+            print('Initialise M_plus model..')
+            self.model = M_plus(filename=self.model_file, seed=seed, n_position=self.task.n_pos,
                                     hyperparam_optim=self.hyperparam_optim, lr=self.lr, sr=self.sr,
                                     connect_limit=self.connect_limit,
                                     connect_prob=self.connect_prob,

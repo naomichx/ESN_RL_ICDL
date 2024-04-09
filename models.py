@@ -702,7 +702,7 @@ class M_3(M_O):
         self.readout.params['Wout'] = sp.csr_matrix(W_out)
 
 
-class M_0_bis(M_O):
+class M_plus(M_O):
     def __init__(self, seed, filename, separate_input, n_position=4,
                  hyperparam_optim=False, lr=None,
                  sr=None, connect_limit=None, connect_prob=None, angle=None,

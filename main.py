@@ -5,7 +5,7 @@ from utils import plot_success, moving_average, plot_output_activity, plot_w_out
     nextnonexistent, json_exists, save_files
 
 
-model_type = 'M_0_bis'
+model_type = 'M_2' #M_1, M_2, M_3, M_plus, M_star
 testing = True
 show_plots = False
 save = True
